@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - cmd: bin/helm delete perestroika
+        ignore_error: true
+      - bin/helm package helm/perestroika --destination helm
+      - bin/helm install perestroika helm/perestroika-0.1.0.tgz
+  clear:
+    cmds:
+      - bin/helm delete perestroika
