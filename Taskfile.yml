@@ -3,10 +3,16 @@ version: '3'
 tasks:
   default:
     cmds:
+      - task: install
       - cmd: bin/helm delete perestroika
         ignore_error: true
       - bin/helm package helm/perestroika --destination helm
       - bin/helm install perestroika helm/perestroika-0.1.0.tgz
+  install:
+    dir: helm/perestroika
+    cmds:
+      - ../../bin/helm dependency update
+      - ../../bin/helm dependency build
   clear:
     cmds:
       - bin/helm delete perestroika
